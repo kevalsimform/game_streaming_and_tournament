@@ -12,6 +12,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  bool isUnderAppBar = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +21,14 @@ class _ProfileState extends State<Profile> {
       extendBody: true,
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: isUnderAppBar ? Colors.black87 : Colors.transparent,
+        notificationPredicate: (scrollNotification) {
+          setState(() {
+            isUnderAppBar = scrollNotification.metrics.extentBefore > 0 ? true : false;
+          });
+
+          return true;
+        },
         title: Text(
           'Profile',
           style: TextStyle(
@@ -68,34 +78,29 @@ class _ProfileState extends State<Profile> {
                   Stack(
                     alignment: Alignment.center,
                     children: [
-                      Container(
+                      SizedBox(
                         height: 150,
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.redAccent,
-                              radius: 70,
-                            ),
-                            CircleAvatar(
-                              backgroundColor: Colors.black87,
-                              radius: 65,
-                            ),
-                            CircleAvatar(
-                              backgroundColor: Colors.blueAccent,
-                              radius: 60,
-                            ),
-                            Container(
-                              height: 110,
-                              width: 110,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(65),
-                                child: Image.asset(
-                                  'assets/pic1.jpeg',
-                                ),
-                              ),
-                            ),
-                          ],
+                      ),
+                      CircleAvatar(
+                        backgroundColor: Colors.redAccent,
+                        radius: 70,
+                      ),
+                      CircleAvatar(
+                        backgroundColor: Colors.black87,
+                        radius: 65,
+                      ),
+                      CircleAvatar(
+                        backgroundColor: Colors.blueAccent,
+                        radius: 60,
+                      ),
+                      Container(
+                        height: 110,
+                        width: 110,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(65),
+                          child: Image.asset(
+                            'assets/pic1.jpeg',
+                          ),
                         ),
                       ),
                       Positioned(

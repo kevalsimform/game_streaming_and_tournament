@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:game_streaming_and_tournament/constants.dart';
+import 'package:game_streaming_and_tournament/screens/char.dart';
 
 class Social extends StatefulWidget {
   const Social({Key? key}) : super(key: key);
@@ -67,24 +69,7 @@ class _SocialState extends State<Social> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
                   ),
                 ),
-                infoTile(
-                  index: 1,
-                  name: 'Valorant BoYz',
-                  isTick: true,
-                  isStreaming: false,
-                ),
-                infoTile(
-                  index: 2,
-                  name: 'vALO bUY',
-                  isTick: false,
-                  isStreaming: false,
-                ),
-                infoTile(
-                  index: 1,
-                  name: 'dAVID vALO',
-                  isTick: true,
-                  isStreaming: false,
-                ),
+                ...peoples.map((e) => infoTile(name: e.name, isTick: e.isVerified, isStreaming: e.isStreaming, imageUrl: e.imagePath)),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 20),
                   child: Text(
@@ -92,24 +77,7 @@ class _SocialState extends State<Social> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
                   ),
                 ),
-                infoTile(
-                  index: 1,
-                  name: 'Ahmad Curtiz',
-                  isTick: true,
-                  isStreaming: true,
-                ),
-                infoTile(
-                  index: 2,
-                  name: 'Justing  Schindler ',
-                  isTick: true,
-                  isStreaming: true,
-                ),
-                infoTile(
-                  index: 1,
-                  name: 'Marcuz Kenter',
-                  isTick: true,
-                  isStreaming: true,
-                ),
+                ...onStreaming.map((e) => infoTile(name: e.name, isTick: e.isVerified, isStreaming: e.isStreaming, imageUrl: e.imagePath)),
               ],
             ),
           ),
@@ -121,114 +89,115 @@ class _SocialState extends State<Social> {
 }
 
 class infoTile extends StatelessWidget {
-  final int index;
+  final String imageUrl;
   final String name;
   final bool isTick;
   final bool isStreaming;
 
-  const infoTile({
-    super.key,
-    required this.index,
-    required this.name,
-    required this.isTick,
-    required this.isStreaming,
-  });
+  const infoTile({super.key, required this.name, required this.isTick, required this.isStreaming, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
-          child: Container(
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 50,
-                  width: 50,
-                  child: Stack(
-                    children: [
-                      SizedBox(
-                        height: 50,
-                        width: 50,
-                      ),
-                      Center(
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(40),
-                              child: Image.asset(
-                                'assets/pic$index.jpeg',
-                                height: 40,
-                                width: 40,
-                              )),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Chat(chatWith: name, imageUrl: imageUrl)));
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
+            child: Container(
+              height: 50,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 50,
+                    width: 50,
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                          height: 50,
+                          width: 50,
                         ),
-                      ),
-                      isStreaming
-                          ? Positioned(
-                              right: 0,
-                              top: 0,
-                              child: Container(
+                        Center(
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(40),
+                                child: Image.asset(
+                                  imageUrl,
+                                  height: 40,
+                                  width: 40,
+                                )),
+                          ),
+                        ),
+                        isStreaming
+                            ? Positioned(
+                                right: 0,
+                                top: 0,
+                                child: Container(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(color: Colors.white, width: 2)),
+                                  child: Icon(
+                                    Icons.rocket_launch_outlined,
+                                    color: Colors.white,
+                                    size: 10,
+                                  ),
+                                ))
+                            : Container(
                                 height: 20,
                                 width: 20,
-                                decoration: BoxDecoration(
-                                    color: Colors.green, borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.white, width: 2)),
-                                child: Icon(
-                                  Icons.rocket_launch_outlined,
-                                  color: Colors.white,
-                                  size: 10,
-                                ),
-                              ))
-                          : Container(
-                              height: 20,
-                              width: 20,
-                            )
-                    ],
+                              )
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            '$name',
-                            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          isTick
-                              ? CircleAvatar(
-                                  backgroundColor: Colors.blueAccent,
-                                  radius: 9,
-                                  child: Icon(
-                                    CupertinoIcons.check_mark,
-                                    color: Colors.white,
-                                    size: 13,
-                                  ),
-                                )
-                              : Container()
-                        ],
-                      ),
-                      Text(
-                        '636 Follower',
-                        style: TextStyle(
-                          color: Colors.grey,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              '$name',
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            isTick
+                                ? CircleAvatar(
+                                    backgroundColor: Colors.blueAccent,
+                                    radius: 9,
+                                    child: Icon(
+                                      CupertinoIcons.check_mark,
+                                      color: Colors.white,
+                                      size: 13,
+                                    ),
+                                  )
+                                : Container()
+                          ],
                         ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                        Text(
+                          '636 Follower',
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

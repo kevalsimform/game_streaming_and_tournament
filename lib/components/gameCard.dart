@@ -26,10 +26,8 @@ class GameCard extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Expanded(
-                    child: Image.asset(
-                      'assets/games/s$index.jpeg',
-                    ),
+                  child: Image.asset(
+                    'assets/games/s$index.jpeg',
                   ),
                 ),
               ),
