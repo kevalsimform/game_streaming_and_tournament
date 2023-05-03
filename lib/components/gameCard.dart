@@ -17,13 +17,14 @@ class GameCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 200,
+        height: MediaQuery.of(context).orientation == Orientation.portrait ? 200 : 260,
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 0.6,
+                // width: MediaQuery.of(context).size.width * 0.6,
+                height: MediaQuery.of(context).orientation == Orientation.portrait ? 160 : 225,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.asset(
@@ -34,8 +35,8 @@ class GameCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  '$title',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ' $title',
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 ),
               )
             ],
@@ -52,9 +53,9 @@ class GameCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        decoration: BoxDecoration(color: Colors.black54.withOpacity(0.2), borderRadius: BorderRadius.circular(20)),
+                        decoration: BoxDecoration(color: Colors.black54.withOpacity(0.3), borderRadius: BorderRadius.circular(8)),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           child: Text(
                             '${watching}k Watching',
                             style: TextStyle(fontSize: 12, color: Colors.white),
@@ -62,9 +63,9 @@ class GameCard extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        decoration: BoxDecoration(color: Colors.redAccent, borderRadius: BorderRadius.circular(20)),
+                        decoration: BoxDecoration(color: Color(0xffe33639), borderRadius: BorderRadius.circular(8)),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           child: Row(
                             children: [
                               Icon(
@@ -72,7 +73,7 @@ class GameCard extends StatelessWidget {
                                 size: 14,
                               ),
                               SizedBox(
-                                width: 10,
+                                width: 6,
                               ),
                               Text(
                                 'Live',

@@ -8,6 +8,6 @@ List<People> peoples = [
 
 List<People> onStreaming = [
   People('Ahmad Curtiz', 213, 'assets/pic1.jpeg', true, true),
-  People('Justing  Schindler ', 894, 'assets/pic2.jpeg', true, true),
+  People('Justing Schindler ', 894, 'assets/pic2.jpeg', true, true),
   People('Marcuz Kenter', 469, 'assets/pic1.jpeg', true, true),
 ];
