@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../components/gameCard.dart';
+import '../components/game_card.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -19,47 +19,41 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      appBar: PreferredSize(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
-          child: AppBar(
-            centerTitle: true,
-            leadingWidth: 80,
-            backgroundColor: isUnderAppBar ? Colors.black12 : Colors.transparent,
-            notificationPredicate: (scrollNotification) {
-              setState(() {
-                isUnderAppBar = scrollNotification.metrics.extentBefore > 0 ? true : false;
-              });
-              return true;
-            },
-            title: Text(
-              'Profile',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18),
-            ),
-            leading: IconButton(
+      appBar: AppBar(
+        centerTitle: true,
+        leadingWidth: 80,
+        backgroundColor: isUnderAppBar ? Colors.black12 : Colors.transparent,
+        notificationPredicate: (scrollNotification) {
+          setState(() {
+            isUnderAppBar = scrollNotification.metrics.extentBefore > 0 ? true : false;
+          });
+          return true;
+        },
+        title: Text(
+          'Profile',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18),
+        ),
+        leading: IconButton(
+            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1))),
+            onPressed: () {},
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.white,
+              size: 18,
+            )),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: IconButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1))),
                 onPressed: () {},
                 icon: Icon(
-                  Icons.arrow_back_ios_new_rounded,
+                  Icons.more_horiz_rounded,
                   color: Colors.white,
-                  size: 18,
+                  size: 22,
                 )),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: IconButton(
-                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1))),
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.more_horiz_rounded,
-                      color: Colors.white,
-                      size: 22,
-                    )),
-              ),
-            ],
           ),
-        ),
-        preferredSize: Size(double.infinity, kToolbarHeight),
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -350,7 +344,7 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                           SizedBox(
-                            height: 20,
+                            height: MediaQuery.of(context).orientation == Orientation.portrait ? 80 : 20,
                           )
                         ],
                       ))

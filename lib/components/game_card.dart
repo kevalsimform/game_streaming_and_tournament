@@ -18,13 +18,14 @@ class GameCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: MediaQuery.of(context).orientation == Orientation.portrait ? 200 : 260,
+        constraints: BoxConstraints(minWidth: 200),
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                // width: MediaQuery.of(context).size.width * 0.6,
                 height: MediaQuery.of(context).orientation == Orientation.portrait ? 160 : 225,
+                constraints: BoxConstraints(minWidth: 200),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.asset(

@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:game_streaming_and_tournament/models/message.dart';
 
+import '../components/message_tile.dart';
+
 class Chat extends StatefulWidget {
   final String chatWith;
   final String imageUrl;
@@ -26,7 +28,7 @@ class _ChatState extends State<Chat> {
     getMessageTiles();
   }
 
-  sendMessage() async {
+  void sendMessage() async {
     if (controller.text.trim() != '') {
       DateTime time = DateTime.now();
       messages.add(Message(controller.text, true, time));
@@ -45,18 +47,16 @@ class _ChatState extends State<Chat> {
                 milliseconds: messagesSentIndex.indexOf(element) < messagesSentIndex.length / 4
                     ? math.Random().nextInt(6000)
                     : messagesSentIndex.indexOf(element) < messagesSentIndex.length / 3
-                        ? math.Random().nextInt(4000)
+                        ? math.Random().nextInt(3000)
                         : messagesSentIndex.indexOf(element) < messagesSentIndex.length / 2
-                            ? math.Random().nextInt(3000)
+                            ? math.Random().nextInt(2000)
                             : messagesSentIndex.indexOf(element) < messagesSentIndex.length / 1
-                                ? math.Random().nextInt(2000)
-                                : math.Random().nextInt(1000)))
+                                ? math.Random().nextInt(1000)
+                                : math.Random().nextInt(4000)))
             .then((value) {
           messages.add(Message(messages[element].msg, false, DateTime.now()));
           getMessageTiles();
-          print('insede then');
         });
-        print('agter then');
       }
       setState(() {
         isTyping = false;
@@ -78,8 +78,6 @@ class _ChatState extends State<Chat> {
       if (index == 0 || messages[index].isSentByMe != messages[index - 1].isSentByMe) {
         int containerIndex = index;
 
-        print('make a container at index $index');
-
         for (int i = index; i < messages.length; i++) {
           if (index == 0) {
             index = i;
@@ -88,17 +86,14 @@ class _ChatState extends State<Chat> {
                 msg: messages[i].msg,
                 isFirst: true,
                 isLast: i < messages.length - 1 ? messages[i].isSentByMe != messages[i + 1].isSentByMe : true));
-            print('       add a tile for $index : inside index == 0');
           } else {
             if (messages[i].isSentByMe == messages[i - 1].isSentByMe) {
-              print('       message sent by same person index $i and ${i - 1}');
               index = i;
               tiles.add(MessageTile(
                   sendByYou: messages[i].isSentByMe,
                   msg: messages[i].msg,
                   isFirst: containerIndex == i,
                   isLast: i < messages.length - 1 ? messages[i].isSentByMe != messages[i + 1].isSentByMe : true));
-              print('       add a tile for $index');
             } else if (containerIndex == i) {
               index = i; // 2 2
               tiles.add(MessageTile(
@@ -106,15 +101,12 @@ class _ChatState extends State<Chat> {
                   msg: messages[i].msg,
                   isFirst: containerIndex == i,
                   isLast: i < messages.length - 1 ? messages[i].isSentByMe != messages[i + 1].isSentByMe : true));
-              print('       add a tile for $index');
             } else {
               break;
             }
           }
         }
-      } else {
-        print('       add a tile for $index');
-      }
+      } else {}
       setState(() {
         widgets.add(getContainerWithTiles(startingIndex, messages[startingIndex].isSentByMe, tiles));
       });
@@ -126,9 +118,9 @@ class _ChatState extends State<Chat> {
     return isSentByMe
         ? Container(
             width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 60),
-              child: Expanded(
+            child: Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 60),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -293,11 +285,9 @@ class _ChatState extends State<Chat> {
                                         autocorrect: false,
                                         decoration: InputDecoration(
                                             enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                                              borderSide: BorderSide(color: Colors.transparent, width: 2),
+                                              borderSide: BorderSide(color: Colors.transparent, width: 0),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(0.0)),
                                               borderSide: BorderSide(color: Colors.transparent),
                                             ),
                                             hintText: 'Write Message',
@@ -378,52 +368,6 @@ class _ChatState extends State<Chat> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class MessageTile extends StatelessWidget {
-  final bool sendByYou;
-  final String msg;
-  final bool isFirst;
-  final bool isLast;
-
-  const MessageTile({Key? key, required this.sendByYou, required this.msg, required this.isFirst, required this.isLast}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: EdgeInsets.only(top: 5, bottom: isLast ? 8 : 0),
-        child: Container(
-          decoration: BoxDecoration(
-              color: sendByYou ? Color(0xff2a63e2) : Color(0xff2c2c2c),
-              borderRadius: BorderRadius.only(
-                  topLeft: sendByYou
-                      ? Radius.circular(20)
-                      : !isFirst && !isLast
-                          ? Radius.circular(6)
-                          : isLast
-                              ? Radius.circular(0)
-                              : Radius.circular(20),
-                  bottomLeft: sendByYou
-                      ? Radius.circular(20)
-                      : !isFirst && !isLast
-                          ? Radius.circular(6)
-                          : isLast
-                              ? Radius.circular(20)
-                              : Radius.circular(0),
-                  topRight: !sendByYou ? Radius.circular(20) : Radius.circular(20),
-                  bottomRight: !sendByYou ? Radius.circular(20) : Radius.circular(0))),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 16, bottom: 16),
-            child: Text(
-              msg,
-              style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
-            ),
-          ),
-        ),
       ),
     );
   }
