@@ -19,14 +19,14 @@ class _SocialState extends State<Social> {
         appBar: AppBar(
           centerTitle: true,
           leadingWidth: 80,
-          title: Text(
+          title: const Text(
             'Social',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18),
           ),
           leading: IconButton(
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1))),
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios_new_rounded,
                 color: Colors.white,
                 size: 18,
@@ -37,14 +37,14 @@ class _SocialState extends State<Social> {
               child: IconButton(
                   style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1))),
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.more_horiz_rounded,
                     color: Colors.white,
                     size: 22,
                   )),
             ),
           ],
-          bottom: TabBar(
+          bottom: const TabBar(
               labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 14),
               labelColor: Colors.white,
               indicatorSize: TabBarIndicatorSize.tab,
@@ -61,23 +61,23 @@ class _SocialState extends State<Social> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 20, bottom: 10),
+                const Padding(
+                  padding: EdgeInsets.only(top: 20, left: 20, bottom: 10),
                   child: Text(
                     'People',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.white),
                   ),
                 ),
-                ...peoples.map((e) => infoTile(name: e.name, isTick: e.isVerified, isStreaming: e.isStreaming, imageUrl: e.imagePath)),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 20, bottom: 12),
+                ...peoples.map((e) => InfoTile(name: e.name, isTick: e.isVerified, isStreaming: e.isStreaming, imageUrl: e.imagePath)),
+                const Padding(
+                  padding: EdgeInsets.only(top: 20, left: 20, bottom: 12),
                   child: Text(
                     'On Streaming',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.white),
                   ),
                 ),
-                ...onStreaming.map((e) => infoTile(name: e.name, isTick: e.isVerified, isStreaming: e.isStreaming, imageUrl: e.imagePath)),
-                SizedBox(
+                ...onStreaming.map((e) => InfoTile(name: e.name, isTick: e.isVerified, isStreaming: e.isStreaming, imageUrl: e.imagePath)),
+                const SizedBox(
                   height: 40,
                 )
               ],

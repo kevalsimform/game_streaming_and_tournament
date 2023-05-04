@@ -29,14 +29,14 @@ class _ProfileState extends State<Profile> {
           });
           return true;
         },
-        title: Text(
+        title: const Text(
           'Profile',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18),
         ),
         leading: IconButton(
             style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1))),
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
               color: Colors.white,
               size: 18,
@@ -47,7 +47,7 @@ class _ProfileState extends State<Profile> {
             child: IconButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1))),
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.more_horiz_rounded,
                   color: Colors.white,
                   size: 22,
@@ -58,7 +58,7 @@ class _ProfileState extends State<Profile> {
       body: Container(
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.0),
-          image: DecorationImage(
+          image: const DecorationImage(
             image: AssetImage(
               'assets/3.jpeg',
             ),
@@ -70,34 +70,35 @@ class _ProfileState extends State<Profile> {
             sigmaX: 10,
             sigmaY: 10,
           ),
-          child: Container(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 120,
                   ),
                   Stack(
                     alignment: Alignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 125,
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundColor: Color(0xffd73d40),
                         radius: 52,
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundColor: Color(0xff0b0e19),
                         radius: 49,
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundColor: Color(0xff2d64e2),
                         radius: 44,
                       ),
-                      Container(
+                      SizedBox(
                         height: 80,
                         width: 80,
                         child: ClipRRect(
@@ -113,10 +114,10 @@ class _ProfileState extends State<Profile> {
                               height: 26,
                               width: 50,
                               decoration: BoxDecoration(
-                                  color: Color(0xffe33639),
+                                  color: const Color(0xffe33639),
                                   borderRadius: BorderRadius.circular(20),
-                                  border: Border.fromBorderSide(BorderSide(color: Colors.black, width: 3))),
-                              child: Center(
+                                  border: const Border.fromBorderSide(BorderSide(color: Colors.black, width: 3))),
+                              child: const Center(
                                 child: Text(
                                   'Live',
                                   style: TextStyle(
@@ -127,22 +128,22 @@ class _ProfileState extends State<Profile> {
                               )))
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 14),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 14),
                     child: Text(
                       '@Awkirrun',
                       style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 0),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8, bottom: 0),
                     child: Text(
                       'I\'m back stream valorant',
                       style: TextStyle(fontWeight: FontWeight.w400, color: Colors.white, fontSize: 15),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 0, bottom: 22),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 0, bottom: 22),
                     child: Text(
                       'Watch me stream everyday',
                       style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15, color: Colors.white),
@@ -154,7 +155,7 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Column(
-                          children: [
+                          children: const [
                             Text(
                               '123',
                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -171,7 +172,7 @@ class _ProfileState extends State<Profile> {
                           color: Colors.white,
                         ),
                         Column(
-                          children: [
+                          children: const [
                             Text(
                               '10M',
                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -188,7 +189,7 @@ class _ProfileState extends State<Profile> {
                           color: Colors.white,
                         ),
                         Column(
-                          children: [
+                          children: const [
                             Text(
                               '109',
                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -215,14 +216,14 @@ class _ProfileState extends State<Profile> {
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                                  backgroundColor: MaterialStatePropertyAll(Color(0xff2a63e2)),
-                                  foregroundColor: MaterialStatePropertyAll(Colors.white),
-                                  elevation: MaterialStatePropertyAll(0),
-                                  shadowColor: MaterialStatePropertyAll(Colors.white),
+                                  backgroundColor: const MaterialStatePropertyAll(Color(0xff2a63e2)),
+                                  foregroundColor: const MaterialStatePropertyAll(Colors.white),
+                                  elevation: const MaterialStatePropertyAll(0),
+                                  shadowColor: const MaterialStatePropertyAll(Colors.white),
                                   splashFactory: InkSparkle.constantTurbulenceSeedSplashFactory,
                                 ),
                                 onPressed: () {},
-                                child: Text(
+                                child: const Text(
                                   'Follow',
                                   style: TextStyle(fontSize: 14),
                                 ),
@@ -238,12 +239,12 @@ class _ProfileState extends State<Profile> {
                               child: OutlinedButton(
                                 style: ButtonStyle(
                                   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                                  foregroundColor: MaterialStatePropertyAll(Colors.white),
-                                  side: MaterialStateProperty.all(BorderSide(color: Colors.white)),
+                                  foregroundColor: const MaterialStatePropertyAll(Colors.white),
+                                  side: MaterialStateProperty.all(const BorderSide(color: Colors.white)),
                                   splashFactory: InkSparkle.splashFactory,
                                 ),
                                 onPressed: () {},
-                                child: Text(
+                                child: const Text(
                                   'Add Friend',
                                   style: TextStyle(fontSize: 14),
                                 ),
@@ -258,9 +259,9 @@ class _ProfileState extends State<Profile> {
                       length: 4,
                       child: Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 0),
-                            child: Container(
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 0),
+                            child: SizedBox(
                                 width: double.infinity,
                                 height: 50,
                                 child: TabBar(
@@ -272,7 +273,7 @@ class _ProfileState extends State<Profile> {
                                     indicatorColor: Color(0xff2a63e2),
                                     tabs: [Text('Home'), Text('About'), Text('Video'), Text('Likes')])),
                           ),
-                          Container(
+                          SizedBox(
                             height: MediaQuery.of(context).orientation == Orientation.portrait ? 275 : 410,
                             width: double.infinity,
                             child: TabBarView(
@@ -284,7 +285,7 @@ class _ProfileState extends State<Profile> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
+                                          const Text(
                                             'Recent Streams',
                                             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                                           ),
@@ -295,13 +296,13 @@ class _ProfileState extends State<Profile> {
                                         ],
                                       ),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: MediaQuery.of(context).size.width,
                                       child: SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
-                                        physics: BouncingScrollPhysics(),
+                                        physics: const BouncingScrollPhysics(),
                                         child: Row(
-                                          children: [
+                                          children: const [
                                             SizedBox(
                                               width: 15,
                                             ),
@@ -331,15 +332,9 @@ class _ProfileState extends State<Profile> {
                                     )
                                   ],
                                 ),
-                                Container(
-                                  child: Center(child: Text('About')),
-                                ),
-                                Container(
-                                  child: Center(child: Text('Video')),
-                                ),
-                                Container(
-                                  child: Center(child: Text('Likes')),
-                                ),
+                                const Center(child: Text('About')),
+                                const Center(child: Text('Video')),
+                                const Center(child: Text('Likes')),
                               ],
                             ),
                           ),

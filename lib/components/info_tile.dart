@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 import '../screens/chat.dart';
 
-class infoTile extends StatelessWidget {
+class InfoTile extends StatelessWidget {
   final String imageUrl;
   final String name;
   final bool isTick;
   final bool isStreaming;
 
-  const infoTile({super.key, required this.name, required this.isTick, required this.isStreaming, required this.imageUrl});
+  const InfoTile({super.key, required this.name, required this.isTick, required this.isStreaming, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +21,23 @@ class infoTile extends StatelessWidget {
           },
           child: Padding(
             padding: const EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
-            child: Container(
+            child: SizedBox(
               height: 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 50,
                     width: 50,
                     child: Stack(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                           width: 50,
                         ),
                         Center(
-                          child: Container(
+                          child: SizedBox(
                             width: 40,
                             height: 40,
                             child: ClipRRect(
@@ -60,13 +60,13 @@ class infoTile extends StatelessWidget {
                                       color: Colors.green,
                                       borderRadius: BorderRadius.circular(20),
                                       border: Border.all(color: Colors.white, width: 2)),
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.rocket_launch_outlined,
                                     color: Colors.white,
                                     size: 10,
                                   ),
                                 ))
-                            : Container(
+                            : const SizedBox(
                                 height: 20,
                                 width: 20,
                               )
@@ -82,14 +82,14 @@ class infoTile extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              '$name',
-                              style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white, fontSize: 12),
+                              name,
+                              style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.white, fontSize: 12),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             isTick
-                                ? CircleAvatar(
+                                ? const CircleAvatar(
                                     backgroundColor: Colors.blueAccent,
                                     radius: 8,
                                     child: Icon(
@@ -101,7 +101,7 @@ class infoTile extends StatelessWidget {
                                 : Container()
                           ],
                         ),
-                        Text(
+                        const Text(
                           '636 Follower',
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                           textAlign: TextAlign.start,
@@ -114,8 +114,8 @@ class infoTile extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Divider(),
         )
       ],

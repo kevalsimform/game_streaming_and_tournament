@@ -14,30 +14,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 4;
 
+  List pages = [
+    const Center(child: Text('Home')),
+    const Social(),
+    const Center(child: Text('Search')),
+    const Center(child: Text('Camera')),
+    const Profile()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      body: Container(
-        child: selectedIndex == 4
-            ? Profile()
-            : selectedIndex == 1
-                ? Social()
-                : Container(
-                    child: Center(
-                      child: Text(selectedIndex == 0
-                          ? 'Home'
-                          : selectedIndex == 2
-                              ? 'Search'
-                              : selectedIndex == 3
-                                  ? 'Camera'
-                                  : ''),
-                    ),
-                  ),
-      ),
+      body: pages[selectedIndex],
       bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaY: 5, sigmaX: 5),
           child: BottomNavigationBar(

@@ -18,14 +18,14 @@ class GameCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: MediaQuery.of(context).orientation == Orientation.portrait ? 200 : 260,
-        constraints: BoxConstraints(minWidth: 200),
+        constraints: const BoxConstraints(minWidth: 200),
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 height: MediaQuery.of(context).orientation == Orientation.portrait ? 160 : 225,
-                constraints: BoxConstraints(minWidth: 200),
+                constraints: const BoxConstraints(minWidth: 200),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.asset(
@@ -37,7 +37,7 @@ class GameCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   ' $title',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 ),
               )
             ],
@@ -48,7 +48,7 @@ class GameCard extends StatelessWidget {
               right: 0,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Container(
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,16 +59,16 @@ class GameCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           child: Text(
                             '${watching}k Watching',
-                            style: TextStyle(fontSize: 12, color: Colors.white),
+                            style: const TextStyle(fontSize: 12, color: Colors.white),
                           ),
                         ),
                       ),
                       Container(
-                        decoration: BoxDecoration(color: Color(0xffe33639), borderRadius: BorderRadius.circular(8)),
+                        decoration: BoxDecoration(color: const Color(0xffe33639), borderRadius: BorderRadius.circular(8)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           child: Row(
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.wifi,
                                 size: 14,

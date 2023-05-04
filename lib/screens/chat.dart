@@ -71,7 +71,6 @@ class _ChatState extends State<Chat> {
     });
 
     while (index < messages.length) {
-      print(index);
       int startingIndex = index;
       List<Widget> tiles = [];
 
@@ -116,17 +115,15 @@ class _ChatState extends State<Chat> {
 
   getContainerWithTiles(int startingIndex, bool isSentByMe, List<Widget> tiles) {
     return isSentByMe
-        ? Container(
+        ? SizedBox(
             width: double.infinity,
-            child: Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 60),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    ...tiles,
-                  ],
-                ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 60),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  ...tiles,
+                ],
               ),
             ),
           )
@@ -135,7 +132,7 @@ class _ChatState extends State<Chat> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 12, top: 20, bottom: 0),
-                child: Container(
+                child: SizedBox(
                   width: 40,
                   height: 40,
                   child: ClipRRect(
@@ -162,18 +159,18 @@ class _ChatState extends State<Chat> {
                           children: [
                             Text(
                               !messages[startingIndex].isSentByMe ? widget.chatWith : '',
-                              style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white, fontSize: 12),
+                              style: const TextStyle(fontWeight: FontWeight.w500, color: Colors.white, fontSize: 12),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8,
                             ),
-                            Text('🔥'),
-                            SizedBox(
+                            const Text('🔥'),
+                            const SizedBox(
                               width: 4,
                             ),
                             Text(
                               '${DateTime.now().difference(messages[startingIndex].time).inMinutes}m ago',
-                              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500, fontSize: 12),
+                              style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500, fontSize: 12),
                             )
                           ],
                         ),
@@ -195,14 +192,14 @@ class _ChatState extends State<Chat> {
         leadingWidth: 80,
         title: Text(
           widget.chatWith,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
         ),
         leading: IconButton(
             style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.grey.shade100.withOpacity(0.1))),
             onPressed: () {
               Navigator.of(context).pop();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
               color: Colors.white,
             )),
@@ -212,162 +209,171 @@ class _ChatState extends State<Chat> {
             child: IconButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.grey.shade100.withOpacity(0.1))),
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.more_horiz_rounded,
                   color: Colors.white,
                 )),
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    reverse: true,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ...widgets,
-                          isTyping
-                              ? Padding(
-                                  padding: const EdgeInsets.only(left: 52, top: 2, bottom: 2),
-                                  child: Container(
-                                      height: 40,
-                                      width: 70,
-                                      decoration: BoxDecoration(
-                                          color: Color(0xff2c2c2c),
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(20),
-                                              topLeft: Radius.circular(0),
-                                              bottomRight: Radius.circular(20),
-                                              bottomLeft: Radius.circular(20))),
-                                      child: Image.asset(
-                                        'assets/typing.gif',
-                                        height: 20,
-                                      )),
-                                )
-                              : Container(),
-                          SizedBox(
-                            height: 10,
-                          )
-                        ],
-                      ),
-                    ),
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                reverse: true,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ...widgets,
+                      isTyping
+                          ? Padding(
+                              padding: const EdgeInsets.only(left: 52, top: 2, bottom: 2),
+                              child: Container(
+                                  height: 40,
+                                  width: 75,
+                                  decoration: const BoxDecoration(
+                                      color: Color(0xff2c2c2c),
+                                      borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                          topLeft: Radius.circular(0),
+                                          bottomRight: Radius.circular(20),
+                                          bottomLeft: Radius.circular(20))),
+                                  child: Image.asset(
+                                    'assets/typing.gif',
+                                    height: 20,
+                                  )),
+                            )
+                          : Container(),
+                      const SizedBox(
+                        height: 10,
+                      )
+                    ],
                   ),
                 ),
-                Container(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 15, left: 20, right: 20, top: 5),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: Container(
-                          decoration: BoxDecoration(color: Color(0xff222222), borderRadius: BorderRadius.circular(30)),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 18),
-                                  child: SizedBox(
-                                    height: 40,
-                                    child: Center(
-                                      child: TextField(
-                                        controller: controller,
-                                        cursorColor: Colors.grey,
-                                        autocorrect: false,
-                                        decoration: InputDecoration(
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(color: Colors.transparent, width: 0),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(color: Colors.transparent),
-                                            ),
-                                            hintText: 'Write Message',
-                                            contentPadding: EdgeInsets.all(0),
-                                            border: InputBorder.none,
-                                            hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Color(0xff797c82), height: 0.8)),
-                                        textInputAction: TextInputAction.send,
-                                        onTapOutside: (pointer) {
-                                          FocusScope.of(context).unfocus();
-                                        },
-                                        onSubmitted: (value) {
-                                          sendMessage();
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: SizedBox(
-                                  height: 35,
-                                  width: 35,
-                                  child: IconButton(
-                                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color(0xff2a64e0))),
-                                    onPressed: () {
-                                      sendMessage();
-                                    },
-                                    icon: Image.asset(
-                                      'assets/icons/send1.png',
-                                      height: 22,
-                                      width: 22,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )),
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: SizedBox(
-                            height: 40,
-                            width: 40,
-                            child: IconButton(
-                                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.grey.shade100.withOpacity(0.1))),
-                                onPressed: () {},
-                                icon: Image.asset(
-                                  'assets/icons/file.png',
-                                  height: 20,
-                                  width: 20,
-                                  color: Colors.white,
-                                )),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: SizedBox(
-                            height: 40,
-                            width: 40,
-                            child: IconButton(
-                                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.grey.shade100.withOpacity(0.1))),
-                                onPressed: () {},
-                                icon: Image.asset(
-                                  'assets/icons/camera.png',
-                                  height: 16,
-                                  width: 16,
-                                  color: Colors.white,
-                                )),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
+              ),
             ),
-          ),
-        ],
+            Container(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                        child: Container(
+                      decoration: BoxDecoration(color: const Color(0xff222222), borderRadius: BorderRadius.circular(30)),
+                      child: Row(
+                        crossAxisAlignment: controller.text.trim() != '' ? CrossAxisAlignment.center : CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 18, bottom: 3, top: 3),
+                              child: Center(
+                                child: TextField(
+                                  controller: controller,
+                                  cursorColor: Colors.grey,
+                                  autocorrect: false,
+                                  maxLines: 4,
+                                  minLines: 1,
+                                  // cursorHeight: 10,
+                                  style: const TextStyle(fontSize: 15),
+                                  decoration: const InputDecoration(
+                                      isDense: true,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.transparent, width: 0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.transparent),
+                                      ),
+                                      hintText: 'Write Message',
+                                      contentPadding: EdgeInsets.all(0),
+                                      border: InputBorder.none,
+                                      hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Color(0xff797c82), height: 0.8)),
+                                  textInputAction: TextInputAction.newline,
+                                  onTapOutside: (pointer) {
+                                    FocusScope.of(context).unfocus();
+                                  },
+                                  onChanged: (value) {
+                                    setState(() {
+                                      controller;
+                                    });
+                                  },
+                                  onSubmitted: (value) {
+                                    sendMessage();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: SizedBox(
+                              height: 35,
+                              width: 35,
+                              child: IconButton(
+                                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(const Color(0xff2a64e0))),
+                                onPressed: () {
+                                  sendMessage();
+                                },
+                                icon: Image.asset(
+                                  'assets/icons/send1.png',
+                                  height: 22,
+                                  width: 22,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
+                    controller.text.trim() != ''
+                        ? Container()
+                        : Padding(
+                            padding: const EdgeInsets.only(left: 6, right: 6, top: 6, bottom: 6),
+                            child: SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: IconButton(
+                                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.grey.shade100.withOpacity(0.1))),
+                                  onPressed: () {},
+                                  icon: Image.asset(
+                                    'assets/icons/file.png',
+                                    height: 20,
+                                    width: 20,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                          ),
+                    controller.text.trim() != ''
+                        ? Container()
+                        : Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: IconButton(
+                                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.grey.shade100.withOpacity(0.1))),
+                                  onPressed: () {},
+                                  icon: Image.asset(
+                                    'assets/icons/camera.png',
+                                    height: 16,
+                                    width: 16,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                          ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
